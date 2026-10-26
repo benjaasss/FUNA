@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUNAS!! - Enlaces Oficiales</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #030303;
+        }
+        
+        /* Ultra Dark Ambient Glowing Lights */
+        .bg-glow-red {
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.25) 0%, rgba(127, 29, 29, 0.05) 70%, transparent 100%);
+            filter: blur(80px);
+            z-index: 0;
+            pointer-events: none;
+            animation: pulse-glow 7s ease-in-out infinite alternate;
+        }
+
+        .bg-glow-dark {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(185, 28, 28, 0.15) 0%, transparent 70%);
+            filter: blur(100px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes pulse-glow {
+            0% { transform: translate(-50%, 0) scale(0.95); opacity: 0.6; }
+            100% { transform: translate(-50%, 15px) scale(1.15); opacity: 1; }
+        }
+
+        /* Glassmorphism Card Styling */
+        .card-glow {
+            background: rgba(12, 12, 14, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card-glow:hover {
+            box-shadow: 0 0 35px -5px rgba(220, 38, 38, 0.45), inset 0 0 15px rgba(220, 38, 38, 0.1);
+            border-color: rgba(220, 38, 38, 0.7);
+            transform: translateY(-3px) scale(1.01);
+        }
+
+        /* Subtle scanline overlay effect for dark atmospheric vibe */
+        .scanline-bg {
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0, 0, 0, 0.3) 50%,
+                rgba(0, 0, 0, 0.3)
+            );
+            background-size: 100% 4px;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-100 flex flex-col justify-between items-center p-4 relative overflow-x-hidden bg-black selection:bg-red-600 selection:text-white scanline-bg">
+
+    <!-- Ambient background glows -->
+    <div class="bg-glow-red top-0 left-1/2"></div>
+    <div class="bg-glow-dark bottom-0 right-0"></div>
+
+    <!-- Main Container -->
+    <main class="w-full max-w-md my-auto relative z-10 py-8 flex flex-col items-center">
+        
+        <!-- Header Profile / Avatar Area -->
+        <div class="flex flex-col items-center text-center mb-8">
+            <div class="relative p-1.5 rounded-full bg-gradient-to-b from-red-600/80 via-red-950/40 to-black mb-6 shadow-[0_0_40px_rgba(220,38,38,0.4)] transition-transform duration-500 hover:scale-105">
+                <div class="bg-black/90 p-4 rounded-full flex items-center justify-center w-32 h-32 border border-red-800/60 shadow-inner backdrop-blur-xl">
+                    <!-- Red Devil SVG vector icon -->
+                    <svg class="w-22 h-22 filter drop-shadow-[0_0_15px_rgba(220,38,38,0.9)]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Left Horn -->
+                        <path d="M 33 35 C 28 20, 22 10, 36 24 C 40 28, 41 33, 41 35 Z" fill="#ef4444" />
+                        <!-- Right Horn -->
+                        <path d="M 67 35 C 72 20, 78 10, 64 24 C 60 28, 59 33, 59 35 Z" fill="#ef4444" />
+                        <!-- Devil Head/Face Circle -->
+                        <circle cx="50" cy="48" r="21" fill="#dc2626" />
+                        <!-- Left Eye -->
+                        <path d="M 39 42 Q 45 47 48 48 Q 44 50 39 46 Z" fill="#000000" />
+                        <!-- Right Eye -->
+                        <path d="M 61 42 Q 55 47 52 48 Q 56 50 61 46 Z" fill="#000000" />
+                        <!-- Tail with Arrow Point -->
+                        <path d="M 29 48 C 20 65, 30 78, 52 72 C 67 68, 77 56, 84 55" stroke="#dc2626" stroke-width="5" stroke-linecap="round" fill="none"/>
+                        <path d="M 75 49 L 88 54 L 81 65 Z" fill="#dc2626" />
+                    </svg>
+                </div>
+            </div>
+            <h1 class="text-5xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-600 to-red-700 drop-shadow-[0_0_25px_rgba(220,38,38,0.8)] uppercase">
+                FUNAS!!
+            </h1>
+        </div>
+
+        <!-- Declaración / Comunicado Estudiantil -->
+        <div class="w-full mb-8">
+            <div class="p-5 rounded-2xl card-glow border border-red-900/40 text-left space-y-3">
+                <div class="flex items-center space-x-2 text-red-500 font-bold text-sm tracking-wide uppercase">
+                    <i class="fa-solid fa-bullhorn text-red-500"></i>
+                    <span>RAZON DE MOVILIZARNOS</span>
+                </div>
+                <p class="text-xs md:text-sm text-zinc-300 leading-relaxed font-normal text-justify">
+                    Nos movilizamos y hacemos pública esta manifestación ante la profunda indignación, la impotencia y el descontento que genera la impunidad y la falta de protección hacia la comunidad estudiantil ante conductas que han sido expuestas de manera pública. Resulta inaceptable cualquier postura institucional que opte por silenciar los hechos para proteger la reputación del establecimiento, exponiendo a los estudiantes. Exigimos firmemente entornos seguros en las aulas, transparencia absoluta, respuestas concretas y la desvinculación inmediata de personal con cuestionamientos de esta índole, dejando en claro que las instituciones educativas tienen el deber básico de garantizar el resguardo de las y los alumnos y que no vamos a tolerar que se siga encubriendo ni protegiendo la inseguridad en nuestras aulas.
+                </p>
+            </div>
+        </div>
+
+        <!-- Links Container -->
+        <div class="w-full space-y-4">
+            
+            <!-- Link 1: Funa 2020 -->
+            <a href="https://www.instagram.com/funa_enma/" target="_blank" rel="noopener noreferrer" 
+               class="block w-full group">
+                <div class="w-full p-4 rounded-2xl card-glow flex items-center justify-between shadow-2xl">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-xl bg-red-950/40 border border-red-900/60 flex items-center justify-center text-red-500 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-inner group-hover:scale-110">
+                            <i class="fa-brands fa-instagram text-2xl"></i>
+                        </div>
+                        <div class="text-left">
+                            <h2 class="font-bold text-lg text-zinc-100 group-hover:text-red-400 transition-colors tracking-wide">funa 2020</h2>
+                            <p class="text-xs text-zinc-500 group-hover:text-zinc-400 transition-colors">@funa_enma</p>
+                        </div>
+                    </div>
+                    <div class="w-9 h-9 rounded-full bg-zinc-900/80 border border-zinc-800 flex items-center justify-center text-zinc-500 group-hover:text-white group-hover:bg-red-600 group-hover:border-red-600 transition-all duration-300 group-hover:translate-x-1">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Link 2: Funa 2026 -->
+            <a href="https://www.instagram.com/funa.enmanuel/" target="_blank" rel="noopener noreferrer" 
+               class="block w-full group">
+                <div class="w-full p-4 rounded-2xl card-glow flex items-center justify-between shadow-2xl">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-xl bg-red-950/40 border border-red-900/60 flex items-center justify-center text-red-500 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-inner group-hover:scale-110">
+                            <i class="fa-brands fa-instagram text-2xl"></i>
+                        </div>
+                        <div class="text-left">
+                            <h2 class="font-bold text-lg text-zinc-100 group-hover:text-red-400 transition-colors tracking-wide">funa 2026</h2>
+                            <p class="text-xs text-zinc-500 group-hover:text-zinc-400 transition-colors">@funa.enmanuel</p>
+                        </div>
+                    </div>
+                    <div class="w-9 h-9 rounded-full bg-zinc-900/80 border border-zinc-800 flex items-center justify-center text-zinc-500 group-hover:text-white group-hover:bg-red-600 group-hover:border-red-600 transition-all duration-300 group-hover:translate-x-1">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- Quote Phrase Section -->
+        <div class="mt-8 w-full text-center px-2">
+            <div class="p-4 rounded-2xl bg-gradient-to-r from-red-950/20 via-zinc-950/80 to-red-950/20 border border-red-900/40 backdrop-blur-md">
+                <p class="text-sm font-semibold italic text-red-500 tracking-wide drop-shadow-[0_0_12px_rgba(220,38,38,0.5)] leading-relaxed">
+                    "Dónde están los filtros y la protección? Fuera los abusos de la educación"
+                </p>
+            </div>
+        </div>
+
+        <!-- Link 3: Cuenta de Organización -->
+        <div class="w-full mt-6">
+            <a href="https://www.instagram.com/organizacion.liceolaportadaa22/" target="_blank" rel="noopener noreferrer" 
+               class="block w-full group">
+                <div class="w-full p-4 rounded-2xl card-glow flex items-center justify-between shadow-2xl">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-xl bg-red-950/40 border border-red-900/60 flex items-center justify-center text-red-500 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-inner group-hover:scale-110">
+                            <i class="fa-brands fa-instagram text-2xl"></i>
+                        </div>
+                        <div class="text-left">
+                            <h2 class="font-bold text-lg text-zinc-100 group-hover:text-red-400 transition-colors tracking-wide">cuenta de organizacion</h2>
+                            <p class="text-xs text-zinc-500 group-hover:text-zinc-400 transition-colors">@organizacion.liceolaportadaa22</p>
+                        </div>
+                    </div>
+                    <div class="w-9 h-9 rounded-full bg-zinc-900/80 border border-zinc-800 flex items-center justify-center text-zinc-500 group-hover:text-white group-hover:bg-red-600 group-hover:border-red-600 transition-all duration-300 group-hover:translate-x-1">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </main>
+
+</body>
+</html>
