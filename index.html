@@ -62,12 +62,6 @@
         details summary::-webkit-details-marker {
             display: none;
         }
-
-        /* Modal custom styles */
-        .modal-backdrop {
-            background-color: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(8px);
-        }
     </style>
 </head>
 <body class="min-h-screen text-slate-200 flex flex-col justify-between items-center p-4 relative overflow-x-hidden bg-slate-900 selection:bg-rose-500 selection:text-white pb-16">
@@ -252,81 +246,6 @@
 
     </main>
 
-    <!-- Botón flotante para abrir Panel Admin -->
-    <button onclick="abrirModalAcceso()" title="Panel de Administración" 
-        class="fixed bottom-3 right-3 z-40 w-10 h-10 rounded-full bg-slate-800/80 hover:bg-rose-600/80 border border-slate-700 hover:border-rose-500/50 text-slate-400 hover:text-white transition-all flex items-center justify-center shadow-lg backdrop-blur-md">
-        <i class="fa-solid fa-user-shield text-sm"></i>
-    </button>
-
-    <!-- Modal 1: Solicitar Contraseña de Administrador -->
-    <div id="modalAuth" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
-        <div class="w-full max-w-xs bg-slate-900 border border-rose-500/30 rounded-2xl p-5 shadow-2xl space-y-4">
-            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                <div class="flex items-center space-x-2 text-rose-400 font-bold text-xs uppercase tracking-wider">
-                    <i class="fa-solid fa-lock"></i>
-                    <span>Acceso Administrador</span>
-                </div>
-                <button onclick="cerrarModalAcceso()" class="text-slate-500 hover:text-slate-300">
-                    <i class="fa-solid fa-xmark text-sm"></i>
-                </button>
-            </div>
-            <p class="text-xs text-slate-400 leading-relaxed">
-                Introduce la clave de acceso para ver el panel de sugerencias recibidas.
-            </p>
-            <form onsubmit="verificarPassword(event)" class="space-y-3">
-                <div>
-                    <input type="password" id="inputPass" required placeholder="Ingresa la clave..." 
-                        class="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-center text-sm text-slate-100 focus:outline-none focus:border-rose-500 tracking-widest">
-                </div>
-                <p id="authError" class="text-[11px] text-rose-500 font-semibold text-center hidden">
-                    ¡Clave incorrecta! Inténtalo de nuevo.
-                </p>
-                <div class="flex gap-2">
-                    <button type="button" onclick="cerrarModalAcceso()" class="flex-1 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 font-semibold">
-                        Cancelar
-                    </button>
-                    <button type="submit" class="flex-1 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-xs text-white font-semibold shadow-md">
-                        Ingresar
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal 2: Panel Administrador (Bandeja de Entrada) -->
-    <div id="modalAdmin" class="fixed inset-0 z-50 flex items-center justify-center p-3 modal-backdrop hidden">
-        <div class="w-full max-w-lg bg-slate-900 border border-rose-500/40 rounded-2xl p-5 shadow-2xl flex flex-col max-h-[85vh]">
-            
-            <!-- Admin Header -->
-            <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
-                <div class="flex items-center space-x-2 text-rose-400 font-bold text-sm uppercase tracking-wider">
-                    <i class="fa-solid fa-inbox text-rose-500"></i>
-                    <span>Panel de Sugerencias</span>
-                    <span id="badgeCount" class="bg-rose-500/20 border border-rose-500/40 text-rose-300 text-[10px] px-2 py-0.5 rounded-full font-bold">0</span>
-                </div>
-                <button onclick="cerrarPanelAdmin()" title="Cerrar y bloquar sesión" class="py-1.5 px-3 rounded-lg bg-rose-950/60 hover:bg-rose-900/80 border border-rose-500/30 text-rose-300 hover:text-white text-xs font-semibold flex items-center space-x-1.5 transition-colors">
-                    <i class="fa-solid fa-lock text-xs"></i>
-                    <span>Cerrar Sesión</span>
-                </button>
-            </div>
-
-            <!-- Total stats & actions bar -->
-            <div class="flex items-center justify-between mb-3 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800 text-xs">
-                <span class="text-slate-400">Mensajes almacenados localmente</span>
-                <button onclick="vaciarSugerencias()" class="text-rose-400 hover:text-rose-300 font-medium text-[11px] underline flex items-center space-x-1">
-                    <i class="fa-solid fa-trash-can"></i>
-                    <span>Vaciar todo</span>
-                </button>
-            </div>
-
-            <!-- Sugerencias List Container -->
-            <div id="listaSugerencias" class="flex-1 overflow-y-auto space-y-3 pr-1 text-left text-xs">
-                <!-- Se llena mediante JS -->
-            </div>
-
-        </div>
-    </div>
-
     <!-- Notification Toast -->
     <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-800 border border-rose-500/40 text-rose-300 px-4 py-2.5 rounded-xl text-xs font-semibold shadow-xl opacity-0 transition-opacity duration-300 pointer-events-none z-50 flex items-center space-x-2">
         <i class="fa-solid fa-circle-check text-rose-400"></i>
@@ -334,9 +253,6 @@
     </div>
 
     <script>
-        // Clave requerida
-        const ADMIN_PIN = "201031";
-
         function copiarEnlace() {
             var url = window.location.href;
             var input = document.createElement("input");
@@ -361,15 +277,12 @@
             const rawSubject = document.getElementById('asunto').value.trim();
             const rawMensaje = document.getElementById('mensaje').value.trim();
             
-            // Generar identificador aleatorio para forzar hilos separados en Gmail
             const randomCode = Math.floor(Math.random() * 9000 + 1000);
             const tituloAsunto = rawSubject ? rawSubject : "Sugerencia Anónima";
             const finalSubject = `${tituloAsunto} [Ref #${randomCode}]`;
 
-            // Formatear el contenido del correo para incluir el Asunto claramente en el cuerpo del mensaje
             const cuerpoFormateado = `ASUNTO: ${tituloAsunto}\nREFERENCIA: #${randomCode}\n-----------------------------------\n\nMENSAJE:\n${rawMensaje}`;
 
-            // Crear objeto FormData limpio para enviar
             const data = new FormData();
             data.append('subject', finalSubject);
             data.append('_subject', finalSubject);
@@ -384,8 +297,6 @@
                 });
 
                 if (response.ok) {
-                    // Guardar localmente en el Panel de Administración
-                    guardarSugerenciaLocal(tituloAsunto, rawMensaje, randomCode);
                     mostrarToast("¡Sugerencia privada enviada con éxito!");
                     form.reset();
                 } else {
@@ -397,111 +308,6 @@
                 btnSubmit.disabled = false;
                 btnText.innerText = 'Enviar Mensaje Privado';
             }
-        }
-
-        // --- SISTEMA DE PANEL DE ADMINISTRACIÓN ---
-
-        function abrirModalAcceso() {
-            document.getElementById('inputPass').value = '';
-            document.getElementById('authError').classList.add('hidden');
-            document.getElementById('modalAuth').classList.remove('hidden');
-        }
-
-        function cerrarModalAcceso() {
-            document.getElementById('modalAuth').classList.add('hidden');
-        }
-
-        function verificarPassword(e) {
-            e.preventDefault();
-            const pass = document.getElementById('inputPass').value.trim();
-            if (pass === ADMIN_PIN) {
-                cerrarModalAcceso();
-                abrirPanelAdmin();
-            } else {
-                document.getElementById('authError').classList.remove('hidden');
-            }
-        }
-
-        function abrirPanelAdmin() {
-            renderizarSugerencias();
-            document.getElementById('modalAdmin').classList.remove('hidden');
-        }
-
-        function cerrarPanelAdmin() {
-            // Cada vez que se cierra el panel, se vuelve a bloquear y requerirá clave para ingresar
-            document.getElementById('modalAdmin').classList.add('hidden');
-            mostrarToast("Sesión del Panel de Administración cerrada.");
-        }
-
-        function guardarSugerenciaLocal(asunto, mensaje, ref) {
-            let sugerencias = JSON.parse(localStorage.getItem('funas_sugerencias') || '[]');
-            const nueva = {
-                id: Date.now(),
-                ref: ref,
-                asunto: asunto,
-                mensaje: mensaje,
-                fecha: new Date().toLocaleString('es-CL')
-            };
-            sugerencias.unshift(nueva);
-            localStorage.setItem('funas_sugerencias', JSON.stringify(sugerencias));
-        }
-
-        function renderizarSugerencias() {
-            const sugerencias = JSON.parse(localStorage.getItem('funas_sugerencias') || '[]');
-            const container = document.getElementById('listaSugerencias');
-            const badgeCount = document.getElementById('badgeCount');
-            
-            badgeCount.innerText = sugerencias.length;
-
-            if (sugerencias.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-8 text-slate-500">
-                        <i class="fa-regular fa-folder-open text-3xl mb-2 opacity-50"></i>
-                        <p>No hay sugerencias o mensajes registrados aún.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            container.innerHTML = sugerencias.map(item => `
-                <div class="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2 relative group hover:border-rose-500/30 transition-colors">
-                    <div class="flex items-start justify-between">
-                        <div class="space-y-0.5">
-                            <span class="inline-block px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 font-bold text-[10px] tracking-wide border border-rose-500/20">
-                                Ref #${item.ref}
-                            </span>
-                            <h3 class="font-bold text-slate-200 text-xs pt-1">${escapeHTML(item.asunto)}</h3>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="text-[10px] text-slate-500">${item.fecha}</span>
-                            <button onclick="eliminarSugerencia(${item.id})" title="Eliminar este mensaje" class="text-slate-600 hover:text-rose-400 p-1 transition-colors">
-                                <i class="fa-solid fa-trash-can text-xs"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <p class="text-slate-300 text-xs bg-slate-900/60 p-2.5 rounded-lg border border-slate-800/80 leading-relaxed whitespace-pre-wrap">${escapeHTML(item.mensaje)}</p>
-                </div>
-            `).join('');
-        }
-
-        function eliminarSugerencia(id) {
-            let sugerencias = JSON.parse(localStorage.getItem('funas_sugerencias') || '[]');
-            sugerencias = sugerencias.filter(item => item.id !== id);
-            localStorage.setItem('funas_sugerencias', JSON.stringify(sugerencias));
-            renderizarSugerencias();
-        }
-
-        function vaciarSugerencias() {
-            if (confirm("¿Estás seguro de que deseas borrar todas las sugerencias guardadas?")) {
-                localStorage.removeItem('funas_sugerencias');
-                renderizarSugerencias();
-            }
-        }
-
-        function escapeHTML(str) {
-            return str.replace(/[&<>'"]/g, 
-                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
-            );
         }
 
         function mostrarToast(mensaje) {
